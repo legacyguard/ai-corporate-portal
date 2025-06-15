@@ -1,13 +1,27 @@
+
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Users, Filter, ChevronLeft, ChevronRight, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Events = () => {
-  const [viewMode, setViewMode<'calendar' | 'list'>('calendar');
+  const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
   const [filterType, setFilterType] = useState('all');
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const featuredEvents = [
+    {
+      title: 'Industry Hyperscaler Hackathon',
+      description: 'Join global teams in building innovative AI solutions for enterprise challenges with industry leaders.',
+      type: 'Hackathon',
+      typeColor: 'bg-purple-100 text-purple-500',
+      date: '2024-05-22',
+      time: 'APAC: 9:00 AM | EMEA: 2:00 PM | USA: 9:00 AM',
+      location: 'Global Virtual Event',
+      spots: '150 / 200',
+      gradient: 'from-purple-400 to-purple-600',
+      prerequisites: 'Basic programming knowledge',
+      speakers: 'Antoine Shagoury (Global CTO), Ismail Amla (SVP Consult)'
+    },
     {
       title: 'AI Fundamentals Workshop',
       description: 'Learn the basics of AI and machine learning in this hands-on workshop.',
@@ -19,22 +33,20 @@ const Events = () => {
       spots: '25 / 30',
       gradient: 'from-blue-400 to-blue-600',
       prerequisites: 'None'
-    },
-    {
-      title: 'Hackathon: AI for Sustainability',
-      description: 'Join us for a weekend of coding and innovation to develop AI solutions for environmental challenges.',
-      type: 'Hackathon',
-      typeColor: 'bg-purple-100 text-purple-500',
-      date: '2024-08-05',
-      time: '9:00 AM - 5:00 PM',
-      location: 'Innovation Lab',
-      spots: '45 / 50',
-      gradient: 'from-purple-400 to-purple-600',
-      prerequisites: 'Basic programming knowledge'
     }
   ];
 
   const allEvents = [
+    {
+      title: 'Industry Hyperscaler Hackathon',
+      description: 'Join global teams in building innovative AI solutions for enterprise challenges.',
+      type: 'Hackathon',
+      typeColor: 'bg-purple-100 text-purple-500',
+      date: '2024-05-22',
+      time: 'APAC: 9:00 AM | EMEA: 2:00 PM | USA: 9:00 AM',
+      location: 'Global Virtual Event',
+      spots: '150 / 200',
+    },
     {
       title: 'AI Fundamentals Workshop',
       description: 'Learn the basics of AI and machine learning in this hands-on workshop.',
@@ -200,11 +212,11 @@ const Events = () => {
             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-corporate-blue"
           >
             <option value="all">All Events</option>
-            <option value="training">Training</option>
-            <option value="workshop">Workshop</option>
-            <option value="hackathon">Hackathon</option>
-            <option value="demo">Demo Day</option>
-            <option value="community">Community</option>
+            <option value="Training">Training</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Hackathon">Hackathon</option>
+            <option value="Demo Day">Demo Day</option>
+            <option value="Community">Community</option>
           </select>
         </div>
 
@@ -223,7 +235,7 @@ const Events = () => {
                     </span>
                     <div className="text-sm text-gray-600 flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
-                      {event.duration}
+                      Global Event
                     </div>
                   </div>
                   
@@ -249,6 +261,13 @@ const Events = () => {
                     <div className="mb-4">
                       <h4 className="font-semibold text-gray-900 mb-1">Prerequisites:</h4>
                       <p className="text-sm text-gray-600">{event.prerequisites}</p>
+                    </div>
+                  )}
+                  
+                  {event.speakers && (
+                    <div className="mb-4">
+                      <h4 className="font-semibold text-gray-900 mb-1">Speakers:</h4>
+                      <p className="text-sm text-gray-600">{event.speakers}</p>
                     </div>
                   )}
                   
