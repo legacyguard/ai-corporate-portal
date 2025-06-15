@@ -81,14 +81,14 @@ const Career = () => {
       icon: '🛡️',
       lead: 'Michal Moravec',
       skills: ['Compliance', 'Data Quality', 'Policy']
+    },
+    {
+      title: 'AI Operations Track / MLOps Track',
+      icon: '⚙️',
+      lead: 'Coming Soon',
+      skills: ['Model Deployment', 'ML Infrastructure', 'Responsible AI'],
+      tbd: true
     }
-  ];
-
-  const metrics = [
-    { label: 'Training Programs Completed', value: '150+' },
-    { label: 'Certifications Achieved', value: '85+' },
-    { label: 'Projects Delivered', value: '45+' },
-    { label: 'Client Engagements', value: '20+' }
   ];
 
   const partners = ['Databricks', 'AWS', 'Google Cloud', 'Microsoft Azure'];
@@ -130,48 +130,40 @@ const Career = () => {
             Your Journey to AI & Data Excellence
           </h2>
           
-          <div className="relative">
-            {/* Timeline line - hidden on mobile */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gray-300 transform -translate-y-1/2"></div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-              {phases.map((phase, index) => (
-                <div key={phase.number} className="relative">
-                  {/* Timeline connector */}
-                  <div className="hidden lg:block absolute top-1/2 left-1/2 w-6 h-6 bg-white border-4 border-gray-300 rounded-full transform -translate-x-1/2 -translate-y-1/2 z-10"></div>
-                  
-                  <Card className="h-full hover:shadow-lg transition-shadow duration-300">
-                    <CardHeader className={`${phase.color} text-white rounded-t-lg`}>
-                      <div className="flex items-center justify-between">
-                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                          <span className="font-bold">{phase.number}</span>
-                        </div>
-                        {index < phases.length - 1 && (
-                          <ChevronRight className="h-5 w-5 opacity-70" />
-                        )}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            {phases.map((phase, index) => (
+              <div key={phase.number} className="relative">
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                  <CardHeader className={`${phase.color} text-white rounded-t-lg`}>
+                    <div className="flex items-center justify-between">
+                      <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <span className="font-bold">{phase.number}</span>
                       </div>
-                      <CardTitle className="text-lg">{phase.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <p className="text-gray-600 mb-4">{phase.description}</p>
-                      <div className="text-sm text-gray-500">
-                        <strong>Lead:</strong> {phase.lead}
-                      </div>
-                      {phase.number === 3 && (
-                        <div className="mt-3">
-                          <a 
-                            href="/lab" 
-                            className="text-corporate-teal hover:underline text-sm font-medium"
-                          >
-                            → Connect to AI Lab Program
-                          </a>
-                        </div>
+                      {index < phases.length - 1 && (
+                        <ChevronRight className="h-5 w-5 opacity-70" />
                       )}
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
+                    </div>
+                    <CardTitle className="text-lg">{phase.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <p className="text-gray-600 mb-4">{phase.description}</p>
+                    <div className="text-sm text-gray-500">
+                      <strong>Lead:</strong> {phase.lead}
+                    </div>
+                    {phase.number === 3 && (
+                      <div className="mt-3">
+                        <a 
+                          href="/lab" 
+                          className="text-corporate-teal hover:underline text-sm font-medium"
+                        >
+                          → Connect to AI Lab Program
+                        </a>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -215,28 +207,8 @@ const Career = () => {
         </div>
       </section>
 
-      {/* Progress Metrics */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-            Program Impact & Success
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {metrics.map((metric, index) => (
-              <Card key={index} className="text-center">
-                <CardContent className="pt-6">
-                  <div className="text-3xl font-bold text-corporate-blue mb-2">{metric.value}</div>
-                  <div className="text-gray-600">{metric.label}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Technology Partners */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
             Technology Partners
@@ -253,7 +225,7 @@ const Career = () => {
       </section>
 
       {/* Application Section */}
-      <section id="application" className="py-16 bg-gray-50">
+      <section id="application" className="py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -370,7 +342,7 @@ const Career = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
             Frequently Asked Questions
