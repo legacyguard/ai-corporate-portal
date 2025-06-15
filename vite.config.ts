@@ -5,6 +5,9 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // 👇 TU pridaj base property
+  base: "/ai-corporate-portal/",
+
   server: {
     host: "::",
     port: 8080,
