@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users, Target } from 'lucide-react';
 
 const Home = () => {
   const resourceCards = [
@@ -18,6 +17,13 @@ const Home = () => {
       icon: Users,
       link: '/use-cases',
       color: 'corporate-green'
+    },
+    {
+      title: 'AI Career Path',
+      description: 'Join our 5-phase journey from learning to leading in AI & Data',
+      icon: Target,
+      link: '/career',
+      color: 'corporate-teal'
     },
     {
       title: 'AI Lab Program',

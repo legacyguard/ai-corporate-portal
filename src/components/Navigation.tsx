@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -11,6 +10,7 @@ const Navigation = () => {
     { name: 'Home', path: '/' },
     { name: 'Tools', path: '/tools' },
     { name: 'AI Lab', path: '/lab' },
+    { name: 'Career Path', path: '/career' },
     { name: 'Request', path: '/request' },
     { name: 'Safety', path: '/safety' },
     { name: 'Guides', path: '/guides' },
