@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Target, ChevronRight, CheckCircle, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -91,7 +90,7 @@ const Career = () => {
     }
   ];
 
-  const partners = ['Databricks', 'AWS', 'Google Cloud', 'Microsoft Azure'];
+  const partners = ['Microsoft Azure', 'Databricks', 'Google Cloud', 'AWS'];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
