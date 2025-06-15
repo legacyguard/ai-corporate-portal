@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,14 +20,22 @@ export default {
 		},
 		extend: {
 			colors: {
+				// Corporate design system colors
+				'corporate-blue': '#0078D4',
+				'corporate-green': '#107C10',
+				'corporate-yellow': '#FFB900',
+				'corporate-teal': '#40E0D0',
+				'corporate-gray': '#F3F2F1',
+				'corporate-red': '#D13438',
+				
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: '#0078D4',
+					foreground: '#FFFFFF'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -84,11 +93,16 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'hover-lift': {
+					'0%': { transform: 'translateY(0px)', boxShadow: '0 1px 3px rgba(0,0,0,0.12)' },
+					'100%': { transform: 'translateY(-4px)', boxShadow: '0 8px 25px rgba(0,0,0,0.15)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'hover-lift': 'hover-lift 0.2s ease-out'
 			}
 		}
 	},
