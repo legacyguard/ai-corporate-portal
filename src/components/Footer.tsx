@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-8">
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3">Getting Started</h3>
             <ul className="space-y-2">
@@ -60,16 +60,6 @@ const Footer = () => {
               <li><a href="mailto:it@company.com" className="text-sm text-gray-600 hover:text-corporate-blue">IT Team</a></li>
               <li><a href="tel:+1-555-0123" className="text-sm text-gray-600 hover:text-corporate-blue">Help Desk</a></li>
             </ul>
-          </div>
-          <div>
-            <div className="flex items-center space-x-4">
-              <div className="bg-corporate-green text-white px-3 py-1 rounded-full text-xs font-medium">
-                M365 E5 Licensed
-              </div>
-              <div className="bg-corporate-blue text-white px-3 py-1 rounded-full text-xs font-medium">
-                Enterprise Secure
-              </div>
-            </div>
           </div>
         </div>
       </div>

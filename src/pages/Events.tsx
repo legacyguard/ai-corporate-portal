@@ -337,7 +337,7 @@ const Events = () => {
                   </div>
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-teal-500 rounded-full mr-2"></div>
-                    <span className="text-sm text-gray-600">Community</span>
+                    <span className="text-sm text-gray-600">Data&AI Community meeting</span>
                   </div>
                 </div>
               </div>
