@@ -62,27 +62,13 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Emergency</h3>
-            <ul className="space-y-2">
-              <li><a href="mailto:security@company.com" className="text-sm text-corporate-red hover:text-corporate-red font-medium">Security Team</a></li>
-              <li><a href="tel:+1-555-0911" className="text-sm text-corporate-red hover:text-corporate-red font-medium">Emergency Line</a></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-gray-600 mb-4 md:mb-0">
-            <p>© {currentYear} Company Name. All rights reserved.</p>
-            <p className="mt-1">Maintained by IT Team • Last updated: {lastUpdate}</p>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            <div className="bg-corporate-green text-white px-3 py-1 rounded-full text-xs font-medium">
-              M365 E5 Licensed
-            </div>
-            <div className="bg-corporate-blue text-white px-3 py-1 rounded-full text-xs font-medium">
-              Enterprise Secure
+            <div className="flex items-center space-x-4">
+              <div className="bg-corporate-green text-white px-3 py-1 rounded-full text-xs font-medium">
+                M365 E5 Licensed
+              </div>
+              <div className="bg-corporate-blue text-white px-3 py-1 rounded-full text-xs font-medium">
+                Enterprise Secure
+              </div>
             </div>
           </div>
         </div>

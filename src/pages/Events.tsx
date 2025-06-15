@@ -1,270 +1,384 @@
-
 import React, { useState } from 'react';
-import { Calendar as CalendarIcon, List, ChevronLeft, ChevronRight, Clock, MapPin, Users, Filter } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Filter, ChevronLeft, ChevronRight, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calendar } from '@/components/ui/calendar';
 
 const Events = () => {
-  const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [viewMode, setViewMode<'calendar' | 'list'>('calendar');
   const [filterType, setFilterType] = useState('all');
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  const eventTypes = {
-    training: { label: 'Training', color: 'bg-corporate-blue text-white' },
-    workshop: { label: 'Workshop', color: 'bg-corporate-green text-white' },
-    hackathon: { label: 'Hackathon', color: 'bg-purple-600 text-white' },
-    demo: { label: 'Demo Day', color: 'bg-orange-500 text-white' },
-    community: { label: 'Community', color: 'bg-corporate-teal text-white' }
-  };
-
-  const sampleEvents = [
+  const featuredEvents = [
     {
-      id: 1,
-      title: 'Industry Hyperscaler Hackathon',
-      type: 'hackathon',
-      date: '2024-05-22',
-      time: '09:00',
-      duration: '8 hours',
-      location: 'Hybrid',
-      speakers: ['Antoine Shagoury (Global CTO)', 'Ismail Amla (Senior VP)'],
-      description: 'Join our 24-hour hackathon featuring industry leaders and global technology experts.',
-      spots: '45/50',
-      timezones: 'APAC, EMEA, USA',
-      featured: true
+      title: 'AI Fundamentals Workshop',
+      description: 'Learn the basics of AI and machine learning in this hands-on workshop.',
+      type: 'Training',
+      typeColor: 'bg-blue-100 text-blue-500',
+      date: '2024-07-15',
+      time: '10:00 AM - 12:00 PM',
+      location: 'Conference Room A',
+      spots: '25 / 30',
+      gradient: 'from-blue-400 to-blue-600',
+      prerequisites: 'None'
     },
     {
-      id: 2,
-      title: 'Copilot Basics Training',
-      type: 'training',
-      date: '2024-05-21',
-      time: '14:00',
-      duration: '2 hours',
-      location: 'Virtual',
-      description: 'New to Microsoft Copilot? Learn the fundamentals in this hands-on session.',
-      spots: '12/20'
-    },
-    {
-      id: 3,
-      title: 'AI Lab Demo Day',
-      type: 'demo',
-      date: '2024-05-23',
-      time: '15:00',
-      duration: '1.5 hours',
-      location: 'Hybrid',
-      description: 'See what our AI Lab participants have built this month.',
-      spots: '25/30'
-    },
-    {
-      id: 4,
-      title: 'Prompt Engineering Workshop',
-      type: 'workshop',
-      date: '2024-05-27',
-      time: '10:00',
-      duration: '3 hours',
-      location: 'In-person',
-      description: 'Master the art of prompt engineering for better AI outputs.',
-      spots: '8/15'
-    },
-    {
-      id: 5,
-      title: 'Monthly AI Community Meetup',
-      type: 'community',
-      date: '2024-05-31',
-      time: '16:00',
-      duration: '2 hours',
-      location: 'In-person',
-      description: 'Informal networking and knowledge sharing session.',
-      spots: '20/25'
+      title: 'Hackathon: AI for Sustainability',
+      description: 'Join us for a weekend of coding and innovation to develop AI solutions for environmental challenges.',
+      type: 'Hackathon',
+      typeColor: 'bg-purple-100 text-purple-500',
+      date: '2024-08-05',
+      time: '9:00 AM - 5:00 PM',
+      location: 'Innovation Lab',
+      spots: '45 / 50',
+      gradient: 'from-purple-400 to-purple-600',
+      prerequisites: 'Basic programming knowledge'
     }
   ];
 
-  const filteredEvents = filterType === 'all' 
-    ? sampleEvents 
-    : sampleEvents.filter(event => event.type === filterType);
+  const allEvents = [
+    {
+      title: 'AI Fundamentals Workshop',
+      description: 'Learn the basics of AI and machine learning in this hands-on workshop.',
+      type: 'Training',
+      typeColor: 'bg-blue-100 text-blue-500',
+      date: '2024-07-15',
+      time: '10:00 AM - 12:00 PM',
+      location: 'Conference Room A',
+      spots: '25 / 30',
+    },
+    {
+      title: 'AI in Healthcare Seminar',
+      description: 'Discover how AI is transforming the healthcare industry.',
+      type: 'Training',
+      typeColor: 'bg-blue-100 text-blue-500',
+      date: '2024-07-22',
+      time: '2:00 PM - 4:00 PM',
+      location: 'Auditorium B',
+      spots: '75 / 100',
+    },
+    {
+      title: 'Data Science Bootcamp',
+      description: 'Intensive training in data analysis and machine learning techniques.',
+      type: 'Training',
+      typeColor: 'bg-blue-100 text-blue-500',
+      date: '2024-08-10',
+      time: '9:00 AM - 5:00 PM',
+      location: 'Training Center C',
+      spots: '15 / 20',
+    },
+    {
+      title: 'AI for Sustainability Hackathon',
+      description: 'Develop AI solutions for environmental challenges.',
+      type: 'Hackathon',
+      typeColor: 'bg-purple-100 text-purple-500',
+      date: '2024-08-05',
+      time: '9:00 AM - 5:00 PM',
+      location: 'Innovation Lab',
+      spots: '45 / 50',
+    },
+    {
+      title: 'AI Demo Day',
+      description: 'Showcase of innovative AI projects developed by our community.',
+      type: 'Demo Day',
+      typeColor: 'bg-orange-100 text-orange-500',
+      date: '2024-08-15',
+      time: '6:00 PM - 8:00 PM',
+      location: 'Event Hall D',
+      spots: '90 / 100',
+    },
+    {
+      title: 'AI Community Meetup',
+      description: 'Networking and knowledge sharing among AI enthusiasts.',
+      type: 'Community',
+      typeColor: 'bg-teal-100 text-teal-500',
+      date: '2024-08-20',
+      time: '7:00 PM - 9:00 PM',
+      location: 'Conference Room E',
+      spots: '30 / 40',
+    },
+    {
+      title: 'AI-Powered Chatbots Workshop',
+      description: 'Learn to build intelligent chatbots using the latest AI technologies.',
+      type: 'Workshop',
+      typeColor: 'bg-green-100 text-green-500',
+      date: '2024-09-02',
+      time: '1:00 PM - 3:00 PM',
+      location: 'Workshop Room F',
+      spots: '18 / 20',
+    },
+  ];
 
-  const featuredEvents = sampleEvents.filter(event => event.featured);
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'short', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    return new Date(year, month + 1, 0).getDate();
   };
 
-  const EventCard = ({ event, featured = false }: { event: any, featured?: boolean }) => (
-    <Card className={`hover:shadow-lg transition-shadow duration-200 ${featured ? 'border-2 border-corporate-blue' : ''}`}>
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <Badge className={eventTypes[event.type as keyof typeof eventTypes].color}>
-            {eventTypes[event.type as keyof typeof eventTypes].label}
-          </Badge>
-          {featured && (
-            <Badge variant="outline" className="text-corporate-blue border-corporate-blue">
-              Featured
-            </Badge>
-          )}
-        </div>
-        <CardTitle className="text-lg">{event.title}</CardTitle>
-        <CardDescription className="flex items-center gap-4 text-sm">
-          <span className="flex items-center gap-1">
-            <CalendarIcon className="h-4 w-4" />
-            {formatDate(event.date)}
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="h-4 w-4" />
-            {event.time}
-          </span>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-gray-600 mb-4">{event.description}</p>
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <MapPin className="h-4 w-4" />
-            {event.location} • {event.duration}
-          </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Users className="h-4 w-4" />
-            {event.spots} spots
-          </div>
-          {event.speakers && (
-            <div className="text-sm text-gray-600">
-              <strong>Speakers:</strong> {event.speakers.join(', ')}
-            </div>
-          )}
-          {event.timezones && (
-            <div className="text-sm text-gray-600">
-              <strong>Time zones:</strong> {event.timezones}
+  const getFirstDayOfMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    return new Date(year, month, 1).getDay();
+  };
+
+  const renderCalendarDays = () => {
+    const daysInMonth = getDaysInMonth(currentMonth);
+    const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
+    const days = [];
+
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      days.push(<div key={`empty-${i}`} className="p-3"></div>);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      const event = allEvents.find(event => {
+        const eventDate = new Date(event.date);
+        return eventDate.getFullYear() === currentMonth.getFullYear() &&
+          eventDate.getMonth() === currentMonth.getMonth() &&
+          eventDate.getDate() === i;
+      });
+
+      days.push(
+        <div key={i} className="p-3 border border-gray-200 text-center relative">
+          {i}
+          {event && (
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-500">
+              {event.type}
             </div>
           )}
         </div>
-        <Button className="w-full">
-          Register Now
-        </Button>
-      </CardContent>
-    </Card>
-  );
+      );
+    }
+
+    return days;
+  };
+
+  const filteredEvents = filterType === 'all'
+    ? allEvents
+    : allEvents.filter(event => event.type === filterType);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-corporate-blue to-corporate-teal text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              AI Events & Training Calendar
-            </h1>
-            <p className="text-xl opacity-90 mb-8">
-              Workshops, training sessions, hackathons, and community meetups
-            </p>
-            
-            {/* View Toggle */}
-            <div className="flex justify-center gap-4 mb-6">
-              <Button
-                variant={viewMode === 'calendar' ? 'secondary' : 'outline'}
-                onClick={() => setViewMode('calendar')}
-                className="flex items-center gap-2"
-              >
-                <CalendarIcon className="h-4 w-4" />
-                Calendar View
-              </Button>
-              <Button
-                variant={viewMode === 'list' ? 'secondary' : 'outline'}
-                onClick={() => setViewMode('list')}
-                className="flex items-center gap-2"
-              >
-                <List className="h-4 w-4" />
-                List View
-              </Button>
-            </div>
-
-            {/* Filter */}
-            <div className="flex justify-center">
-              <select
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
-                className="bg-white text-gray-900 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-white"
-              >
-                <option value="all">All Events</option>
-                <option value="training">Training Sessions</option>
-                <option value="workshop">Workshops</option>
-                <option value="hackathon">Hackathons</option>
-                <option value="demo">Demo Days</option>
-                <option value="community">Community Meetups</option>
-              </select>
-            </div>
-          </div>
+    <div className="min-h-screen py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center">
+            <Calendar className="h-10 w-10 text-corporate-blue mr-3" />
+            AI Events & Training Calendar
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            Workshops, training sessions, hackathons, and community meetups
+          </p>
         </div>
-      </section>
 
-      {/* Featured Events */}
-      {featuredEvents.length > 0 && (
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Featured Events
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {featuredEvents.map((event) => (
-                <EventCard key={event.id} event={event} featured />
-              ))}
-            </div>
+        {/* View Toggle and Filters */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+          <div className="flex bg-gray-100 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode('calendar')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'calendar'
+                  ? 'bg-white text-corporate-blue shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Calendar View
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                viewMode === 'list'
+                  ? 'bg-white text-corporate-blue shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              List View
+            </button>
           </div>
-        </section>
-      )}
 
-      {/* Main Content */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {viewMode === 'calendar' ? (
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">Calendar View</h2>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm">
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <span className="text-lg font-medium px-4">
-                    {selectedDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                  </span>
-                  <Button variant="outline" size="sm">
-                    <ChevronRight className="h-4 w-4" />
+          <select
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-corporate-blue"
+          >
+            <option value="all">All Events</option>
+            <option value="training">Training</option>
+            <option value="workshop">Workshop</option>
+            <option value="hackathon">Hackathon</option>
+            <option value="demo">Demo Day</option>
+            <option value="community">Community</option>
+          </select>
+        </div>
+
+        {/* Featured Events */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Events</h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {featuredEvents.map((event, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow">
+                <div className={`h-32 bg-gradient-to-r ${event.gradient}`}></div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${event.typeColor}`}>
+                      {event.type}
+                    </span>
+                    <div className="text-sm text-gray-600 flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {event.duration}
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h3>
+                  <p className="text-gray-600 mb-4">{event.description}</p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center text-sm text-gray-600">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      {event.date} at {event.time}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-600">
+                      <MapPin className="h-4 w-4 mr-2" />
+                      {event.location}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-600">
+                      <Users className="h-4 w-4 mr-2" />
+                      {event.spots}
+                    </div>
+                  </div>
+                  
+                  {event.prerequisites && (
+                    <div className="mb-4">
+                      <h4 className="font-semibold text-gray-900 mb-1">Prerequisites:</h4>
+                      <p className="text-sm text-gray-600">{event.prerequisites}</p>
+                    </div>
+                  )}
+                  
+                  <Button className="w-full bg-corporate-blue hover:bg-corporate-blue/90">
+                    Register Now
                   </Button>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Calendar/List View */}
+        <section>
+          {viewMode === 'calendar' ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              {/* Calendar Header */}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                </h2>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
+                    className="p-2 hover:bg-gray-100 rounded-lg"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
+                    className="p-2 hover:bg-gray-100 rounded-lg"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Calendar Grid */}
+              <div className="grid grid-cols-7 gap-1">
+                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                  <div key={day} className="p-3 text-center font-medium text-gray-500 text-sm">
+                    {day}
+                  </div>
+                ))}
+                {renderCalendarDays()}
+              </div>
+
+              {/* Event Type Legend */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <h3 className="font-semibold text-gray-900 mb-3">Event Types</h3>
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                    <span className="text-sm text-gray-600">Training</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                    <span className="text-sm text-gray-600">Workshop</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                    <span className="text-sm text-gray-600">Hackathon</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                    <span className="text-sm text-gray-600">Demo Day</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-teal-500 rounded-full mr-2"></div>
+                    <span className="text-sm text-gray-600">Community</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <List className="h-6 w-6 mr-2" />
+                All Events
+              </h2>
               
-              <Calendar
-                selected={selectedDate}
-                onSelect={(date) => date && setSelectedDate(date)}
-                className="w-full"
-              />
-              
-              {/* Event Legend */}
-              <div className="mt-6 flex flex-wrap gap-4">
-                {Object.entries(eventTypes).map(([key, type]) => (
-                  <div key={key} className="flex items-center gap-2">
-                    <div className={`w-3 h-3 rounded-full ${type.color}`}></div>
-                    <span className="text-sm text-gray-600">{type.label}</span>
+              <div className="space-y-6">
+                {filteredEvents.map((event, index) => (
+                  <div key={index} className="border border-gray-200 rounded-lg p-6 hover:shadow-sm transition-shadow">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                      <div className="flex items-center space-x-4 mb-2 md:mb-0">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-corporate-blue">
+                            {new Date(event.date).getDate()}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">{event.title}</h3>
+                          <p className="text-gray-600">{event.description}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${event.typeColor}`}>
+                          {event.type}
+                        </span>
+                        <Button size="sm" className="bg-corporate-blue hover:bg-corporate-blue/90">
+                          Register
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                      <div className="flex items-center">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {event.time}
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        {event.location}
+                      </div>
+                      <div className="flex items-center">
+                        <Users className="h-4 w-4 mr-1" />
+                        {event.spots}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900">Upcoming Events</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
-                ))}
-              </div>
-            </div>
           )}
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };
