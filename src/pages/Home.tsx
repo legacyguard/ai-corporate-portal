@@ -1,20 +1,34 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users } from 'lucide-react';
 
 const Home = () => {
   const resourceCards = [
     {
+      title: 'How-to Guides',
+      description: 'Tutorials for effective AI usage',
+      icon: BookOpen,
+      link: '/guides',
+      color: 'corporate-blue'
+    },
+    {
+      title: 'Copilot Internal Use Cases',
+      description: 'Practical examples for daily usage',
+      icon: Users,
+      link: '/use-cases',
+      color: 'corporate-green'
+    },
+    {
       title: 'AI Lab Program',
-      description: 'Join our exclusive Azure sandbox for hands-on AI/Data Analytics experience',
+      description: 'Join our exclusive Azure sandbox for hands-on experience',
       icon: Rocket,
       link: '/lab',
       color: 'corporate-teal'
     },
     {
       title: 'Request Tools',
-      description: 'Need Google, AWS, or other AI platforms? Submit request for approval',
+      description: 'Need Google, AWS, or other platforms? Submit request for approval',
       icon: FileText,
       link: '/request',
       color: 'corporate-yellow'
@@ -27,15 +41,8 @@ const Home = () => {
       color: 'corporate-red'
     },
     {
-      title: 'How-to Guides',
-      description: 'Practical examples and tutorials for effective AI usage',
-      icon: BookOpen,
-      link: '/guides',
-      color: 'corporate-blue'
-    },
-    {
       title: 'Help & FAQ',
-      description: 'Get answers and support for all AI tools',
+      description: 'Get answers and support for all AI and Data analytics tools',
       icon: HelpCircle,
       link: '/help',
       color: 'gray-600'
@@ -69,7 +76,7 @@ const Home = () => {
             <div className="flex items-center">
               <AlertTriangle className="h-6 w-6 mr-3 flex-shrink-0" />
               <span className="font-semibold text-lg">
-                WARNING: Never input company data, personal information, or client details into AI tools!
+                WARNING: Never input company data, personal information, or client details into any AI tool except Copilot for Work!
               </span>
             </div>
           </div>

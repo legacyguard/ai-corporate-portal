@@ -12,6 +12,7 @@ import Request from "./pages/Request";
 import Safety from "./pages/Safety";
 import Guides from "./pages/Guides";
 import Help from "./pages/Help";
+import UseCases from "./pages/UseCases";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/safety" element={<Safety />} />
             <Route path="/guides" element={<Guides />} />
             <Route path="/help" element={<Help />} />
+            <Route path="/use-cases" element={<UseCases />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

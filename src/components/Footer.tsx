@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Safety Disclaimer */}
         <div className="bg-corporate-red/10 border border-corporate-red/20 rounded-lg p-4 mb-8">
           <p className="text-sm text-corporate-red font-medium text-center">
-            <strong>⚠️ CRITICAL REMINDER:</strong> Never input company data, personal information, or client details into any AI tool. 
+            <strong>⚠️ CRITICAL REMINDER:</strong> Never input company data, personal information, or client details into any AI tool except Copilot for Work. 
             For security incidents, contact IT Security immediately at security@company.com
           </p>
         </div>
