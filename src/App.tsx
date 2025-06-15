@@ -12,6 +12,7 @@ import Career from "./pages/Career";
 import Request from "./pages/Request";
 import Safety from "./pages/Safety";
 import Guides from "./pages/Guides";
+import Newsletter from "./pages/Newsletter";
 import Help from "./pages/Help";
 import UseCases from "./pages/UseCases";
 import NotFound from "./pages/NotFound";
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/request" element={<Request />} />
             <Route path="/safety" element={<Safety />} />
             <Route path="/guides" element={<Guides />} />
+            <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/help" element={<Help />} />
             <Route path="/use-cases" element={<UseCases />} />
             <Route path="*" element={<NotFound />} />

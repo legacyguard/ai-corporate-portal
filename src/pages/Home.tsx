@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users, Target } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users, Target, Mail } from 'lucide-react';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 const Home = () => {
   const resourceCards = [
@@ -45,6 +47,13 @@ const Home = () => {
       icon: Shield,
       link: '/safety',
       color: 'corporate-red'
+    },
+    {
+      title: 'AI Newsletter',
+      description: 'Weekly insights, tips, and updates from our AI journey',
+      icon: Mail,
+      link: '/newsletter',
+      color: 'corporate-blue'
     },
     {
       title: 'Help & FAQ',
@@ -175,6 +184,22 @@ const Home = () => {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Subscription Section */}
+      <section className="bg-blue-50 py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Stay Updated with AI Insights
+          </h2>
+          <p className="text-lg text-gray-600 mb-8">
+            Get weekly AI tips, tool updates, and success stories delivered to your inbox
+          </p>
+          
+          <div className="max-w-md mx-auto">
+            <NewsletterSignup />
           </div>
         </div>
       </section>
