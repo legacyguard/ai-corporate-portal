@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import AILab from "./pages/AILab";
 import Career from "./pages/Career";
+import Events from "./pages/Events";
 import Request from "./pages/Request";
 import Safety from "./pages/Safety";
 import Guides from "./pages/Guides";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/tools" element={<Tools />} />
             <Route path="/lab" element={<AILab />} />
             <Route path="/career" element={<Career />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/request" element={<Request />} />
             <Route path="/safety" element={<Safety />} />
             <Route path="/guides" element={<Guides />} />

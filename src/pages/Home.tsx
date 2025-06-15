@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users, Target, Mail } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Rocket, FileText, Shield, BookOpen, HelpCircle, Users, Target, Mail, Calendar, Clock, MapPin } from 'lucide-react';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const Home = () => {
   const resourceCards = [
@@ -63,6 +66,42 @@ const Home = () => {
       color: 'gray-600'
     }
   ];
+
+  const upcomingEvents = [
+    {
+      id: 1,
+      title: 'Industry Hyperscaler Hackathon',
+      type: 'Hackathon',
+      date: '2024-05-22',
+      time: '09:00',
+      typeColor: 'bg-purple-600'
+    },
+    {
+      id: 2,
+      title: 'Copilot Basics Training',
+      type: 'Training',
+      date: '2024-05-21',
+      time: '14:00',
+      typeColor: 'bg-corporate-blue'
+    },
+    {
+      id: 3,
+      title: 'AI Lab Demo Day',
+      type: 'Demo Day',
+      date: '2024-05-23',
+      time: '15:00',
+      typeColor: 'bg-orange-500'
+    }
+  ];
+
+  const formatEventDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      weekday: 'short', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  };
 
   return (
     <div className="min-h-screen">
@@ -155,7 +194,7 @@ const Home = () => {
           </div>
 
           {/* Additional Resources */}
-          <div>
+          <div className="mb-16">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
               Additional Resources
             </h2>
@@ -184,6 +223,59 @@ const Home = () => {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Events Section */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Don't Miss Out
+            </h2>
+            <p className="text-lg text-gray-600">
+              Join our upcoming AI events and training sessions
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {upcomingEvents.map((event) => (
+              <Card key={event.id} className="hover:shadow-lg transition-shadow duration-200">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className={`${event.typeColor} text-white`}>
+                      {event.type}
+                    </Badge>
+                    <span className="text-sm text-gray-500">
+                      {formatEventDate(event.date)}
+                    </span>
+                  </div>
+                  <CardTitle className="text-lg">{event.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      {event.time}
+                    </span>
+                  </div>
+                  <Button className="w-full" size="sm">
+                    Register
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Link
+              to="/events"
+              className="inline-flex items-center px-6 py-3 bg-corporate-blue hover:bg-corporate-blue/90 text-white font-medium rounded-lg transition-colors duration-200"
+            >
+              <Calendar className="h-5 w-5 mr-2" />
+              View All Events
+            </Link>
           </div>
         </div>
       </section>
