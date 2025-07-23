@@ -108,7 +108,7 @@ const Home = () => {
       <section className="bg-gradient-to-r from-corporate-blue to-corporate-teal text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            AI Tools for Kyndryl Brno
+            AI Swiss Army Knife for Kyndrylers
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
             Full AI access included in your M365 E5 license
