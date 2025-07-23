@@ -108,11 +108,13 @@ const Home = () => {
       <section className="bg-gradient-to-r from-corporate-blue to-corporate-teal text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            AI Swiss Army Knife for Kyndrylers
+            AI Swiss Army Knife for Kyndryls
           </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Full AI access included in your M365 E5 license
-          </p>
+          <img
+            src="/AI%20Swiss%20Army%20Knife.png"
+            alt="Swiss Army Knife Illustration"
+            className="mx-auto mb-6 max-w-xs md:max-w-md rounded-lg shadow-lg"
+          />
           
           {/* Success Banner */}
           <div className="bg-corporate-green rounded-lg p-4 mb-4 text-left max-w-4xl mx-auto">

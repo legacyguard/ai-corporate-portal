@@ -1,268 +1,529 @@
 
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, FileText, Users, BarChart3, Mail, Calendar, MessageSquare, Presentation } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Users, Settings, BarChart2, Megaphone, Crown, BookOpen, FileText, Smile, MessageCircle, Monitor, Layers, FileCheck2, Search, FolderOpen, UserCheck, PieChart, ClipboardList, LayoutDashboard, Briefcase, MessageSquare, Banknote, Factory, Stethoscope, ShoppingBag, Landmark, Phone, Headset, ArrowRightLeft, Book, SmilePlus } from 'lucide-react';
 
-const UseCases = () => {
-  const useCases = [
-    {
-      icon: FileText,
-      title: 'Document Creation & Editing',
-      category: 'Content Creation',
-      examples: [
-        'Draft professional emails and responses',
-        'Create meeting agendas and summaries',
-        'Write project proposals and reports',
-        'Generate policy documents and procedures'
-      ],
-      tools: ['Word Copilot', 'Outlook Copilot']
-    },
-    {
-      icon: BarChart3,
-      title: 'Data Analysis & Insights',
-      category: 'Analytics',
-      examples: [
-        'Analyze sales trends and performance metrics',
-        'Create executive dashboards and reports',
-        'Generate data summaries from large datasets',
-        'Identify patterns in customer feedback'
-      ],
-      tools: ['Excel Copilot', 'Power BI']
-    },
-    {
-      icon: Presentation,
-      title: 'Presentation Design',
-      category: 'Communication',
-      examples: [
-        'Create compelling slide decks for meetings',
-        'Design training materials and workshops',
-        'Build client presentation templates',
-        'Generate visual content from data'
-      ],
-      tools: ['PowerPoint Copilot']
-    },
-    {
-      icon: Users,
-      title: 'Meeting Management',
-      category: 'Collaboration',
-      examples: [
-        'Generate meeting summaries and action items',
-        'Create follow-up tasks from discussions',
-        'Analyze meeting participation and engagement',
-        'Schedule and coordinate team meetings'
-      ],
-      tools: ['Teams Copilot', 'Outlook Copilot']
-    },
-    {
-      icon: Mail,
-      title: 'Communication Enhancement',
-      category: 'Productivity',
-      examples: [
-        'Improve email tone and clarity',
-        'Draft responses to common inquiries',
-        'Create customer service templates',
-        'Generate internal announcements'
-      ],
-      tools: ['Outlook Copilot', 'Teams Copilot']
-    },
-    {
-      icon: MessageSquare,
-      title: 'Knowledge Management',
-      category: 'Information',
-      examples: [
-        'Create FAQ documents from team knowledge',
-        'Organize and categorize information',
-        'Generate training documentation',
-        'Build searchable knowledge bases'
-      ],
-      tools: ['SharePoint Copilot', 'Teams Copilot']
-    }
-  ];
+const departments = [
+  { key: 'hr', name: 'Human Resources', color: 'from-blue-500 to-blue-700' },
+  { key: 'finance', name: 'Finance', color: 'from-cyan-500 to-cyan-700' },
+  { key: 'sales', name: 'Sales & Marketing', color: 'from-indigo-500 to-indigo-700' },
+  { key: 'operations', name: 'Operations', color: 'from-slate-500 to-slate-700' },
+  { key: 'it', name: 'IT & Security', color: 'from-gray-700 to-gray-900' },
+];
 
-  const departments = [
-    {
-      name: 'Human Resources',
-      color: 'corporate-blue',
-      cases: [
-        'Employee handbook updates',
-        'Job description creation',
-        'Performance review summaries',
-        'Training material development'
-      ]
-    },
-    {
-      name: 'Finance',
-      color: 'corporate-green',
-      cases: [
-        'Financial report generation',
-        'Budget analysis and forecasting',
-        'Expense report summaries',
-        'Compliance documentation'
-      ]
-    },
-    {
-      name: 'Sales & Marketing',
-      color: 'corporate-teal',
-      cases: [
-        'Sales proposal creation',
-        'Customer communication templates',
-        'Market analysis reports',
-        'Campaign performance reviews'
-      ]
-    },
-    {
-      name: 'Operations',
-      color: 'corporate-yellow',
-      cases: [
-        'Process documentation',
-        'Operational efficiency reports',
-        'Quality assurance protocols',
-        'Vendor communication'
-      ]
-    }
-  ];
+const departmentCards = [
+  {
+    key: 'hr',
+    name: 'Human Resources (HR)',
+    icon: Users,
+    description: 'Empowering people, talent, and culture with AI-driven HR solutions.'
+  },
+  {
+    key: 'itops',
+    name: 'IT & Operations',
+    icon: Settings,
+    description: 'Streamlining IT and operational processes for efficiency and security.'
+  },
+  {
+    key: 'customer-service',
+    name: 'Customer Service & Support',
+    icon: Headset,
+    description: 'Delivering exceptional support and satisfaction with intelligent service tools.'
+  },
+  {
+    key: 'finance',
+    name: 'Finance & Procurement',
+    icon: BarChart2,
+    description: 'Optimizing financial management and procurement with intelligent automation.'
+  },
+  {
+    key: 'sales',
+    name: 'Sales & Marketing',
+    icon: Megaphone,
+    description: 'Accelerating growth and engagement through data-driven sales and marketing.'
+  },
+  {
+    key: 'leadership',
+    name: 'Leadership & Strategy',
+    icon: Crown,
+    description: 'Driving vision and strategy with actionable insights and analytics.'
+  },
+];
 
-  return (
-    <div className="min-h-screen py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Page Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Copilot Internal Use Cases
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Practical examples of how your colleagues are using Microsoft Copilot to boost productivity and streamline daily tasks
-          </p>
-        </div>
+const industries = [
+  'All Industries',
+  'Banking',
+  'Healthcare',
+  'Retail',
+  'Manufacturing',
+  'Telecommunications',
+  'Energy',
+];
 
-        {/* Safety Reminder */}
-        <div className="bg-corporate-green/10 border border-corporate-green/20 rounded-lg p-6 mb-12">
-          <div className="flex items-start">
-            <CheckCircle className="h-6 w-6 text-corporate-green mr-3 flex-shrink-0 mt-1" />
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Safe for Company Data</h3>
-              <p className="text-gray-700">
-                These use cases are safe with company data because Copilot for Work provides enterprise-grade security 
-                and data protection. Your information stays within our Microsoft tenant and follows all compliance requirements.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Use Cases by Category */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Common Use Cases</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {useCases.map((useCase, index) => {
-              const IconComponent = useCase.icon;
-              return (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                  <CardHeader>
-                    <div className="flex items-center mb-2">
-                      <div className="p-2 rounded-lg bg-corporate-blue/10 mr-3">
-                        <IconComponent className="h-6 w-6 text-corporate-blue" />
-                      </div>
-                      <span className="text-sm text-gray-500 font-medium">{useCase.category}</span>
-                    </div>
-                    <CardTitle className="text-xl">{useCase.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 mb-4">
-                      {useCase.examples.map((example, idx) => (
-                        <li key={idx} className="flex items-start text-sm text-gray-600">
-                          <CheckCircle className="h-4 w-4 text-corporate-green mr-2 flex-shrink-0 mt-0.5" />
-                          {example}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="border-t pt-3">
-                      <p className="text-xs text-gray-500 mb-1">Recommended Tools:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {useCase.tools.map((tool, idx) => (
-                          <span key={idx} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Department-Specific Examples */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">By Department</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {departments.map((dept, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className={`text-xl text-${dept.color} flex items-center`}>
-                    <div className={`w-3 h-3 bg-${dept.color} rounded-full mr-3`}></div>
-                    {dept.name}
-                  </CardTitle>
-                  <CardDescription>Popular use cases in this department</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {dept.cases.map((useCase, idx) => (
-                      <li key={idx} className="flex items-start text-gray-700">
-                        <CheckCircle className="h-4 w-4 text-corporate-green mr-2 flex-shrink-0 mt-0.5" />
-                        {useCase}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Getting Started Section */}
-        <section>
-          <div className="bg-corporate-blue/5 border border-corporate-blue/20 rounded-xl p-8">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                These use cases are just the beginning. Start with simple tasks and gradually explore more advanced features 
-                as you become comfortable with Copilot.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-corporate-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-corporate-blue font-bold">1</span>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Start Small</h3>
-                <p className="text-sm text-gray-600">Begin with simple tasks like email drafting or document summarization</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-corporate-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-corporate-blue font-bold">2</span>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Practice Daily</h3>
-                <p className="text-sm text-gray-600">Use Copilot in your regular workflow to build familiarity</p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-corporate-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-corporate-blue font-bold">3</span>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Share & Learn</h3>
-                <p className="text-sm text-gray-600">Share your discoveries with colleagues and learn from their experiences</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  );
+const useCases = {
+  hr: [
+    { title: 'Automated Onboarding', description: 'Streamline new employee onboarding with AI-driven document processing and personalized training paths.' },
+    { title: 'Employee Sentiment Analysis', description: 'Analyze feedback and engagement surveys to improve workplace satisfaction.' },
+  ],
+  finance: [
+    { title: 'Expense Report Automation', description: 'AI-powered extraction and validation of receipts for faster reimbursement.' },
+    { title: 'Fraud Detection', description: 'Real-time anomaly detection in transactions to prevent financial fraud.' },
+  ],
+  sales: [
+    { title: 'Lead Scoring', description: 'Prioritize sales leads using predictive analytics for higher conversion rates.' },
+    { title: 'Customer Insights', description: 'Aggregate and analyze customer data for targeted marketing.' },
+  ],
+  operations: [
+    { title: 'Supply Chain Optimization', description: 'AI-driven demand forecasting and inventory management.' },
+    { title: 'Process Automation', description: 'Automate repetitive operational tasks to boost efficiency.' },
+  ],
+  it: [
+    { title: 'Threat Detection', description: 'Monitor network activity and detect security threats in real time.' },
+    { title: 'Self-Service IT Support', description: 'AI chatbots for instant resolution of common IT issues.' },
+  ],
 };
 
-export default UseCases;
+const departmentDetails = [
+  {
+    key: 'hr',
+    name: 'Human Resources (HR)',
+    bg: 'bg-blue-50',
+    useCases: [
+      {
+        icon: UserCheck,
+        title: 'Smart Onboarding',
+        description: 'Automated task assignment, documents and training for new employees',
+      },
+      {
+        icon: BookOpen,
+        title: 'Internal Knowledge Base',
+        description: 'Central location for employees to find internal guidelines and procedures',
+      },
+      {
+        icon: Smile,
+        title: 'Employee Satisfaction Analysis',
+        description: 'AI analyzes surveys to identify key trends and issues',
+      },
+    ],
+  },
+  {
+    key: 'itops',
+    name: 'IT & Operations',
+    bg: 'bg-cyan-50',
+    useCases: [
+      {
+        icon: MessageCircle,
+        title: 'IT Support Automation',
+        description: 'Chatbot handles common IT issues and escalates complex requests',
+      },
+      {
+        icon: Monitor,
+        title: 'System Health Monitoring',
+        description: 'Personalized dashboard showing key metrics from various systems',
+      },
+      {
+        icon: Layers,
+        title: 'License & Asset Management',
+        description: 'AI helps optimize software license usage and track hardware lifecycle',
+      },
+    ],
+  },
+  {
+    key: 'customer-service',
+    name: 'Customer Service & Support',
+    bg: 'bg-teal-50',
+    useCases: [
+      {
+        icon: ArrowRightLeft,
+        title: 'Smart Ticket Management',
+        description: 'AI automatically categorizes and routes customer inquiries to the right support specialist based on issue type, priority, and agent expertise',
+      },
+      {
+        icon: Book,
+        title: 'AI-Powered Help Center',
+        description: 'Customers get instant answers from an intelligent knowledge base that learns from past interactions and continuously improves responses',
+      },
+      {
+        icon: SmilePlus,
+        title: 'Real-time Satisfaction Monitoring',
+        description: 'Monitor customer satisfaction in real-time through conversation analysis, enabling proactive intervention and service improvement',
+      },
+    ],
+  },
+  {
+    key: 'finance',
+    name: 'Finance & Procurement',
+    bg: 'bg-indigo-50',
+    useCases: [
+      {
+        icon: BarChart2,
+        title: 'Automated Reporting',
+        description: 'AI portal automatically generates and distributes financial reports',
+      },
+      {
+        icon: FileCheck2,
+        title: 'Invoice Approval Acceleration',
+        description: 'Intelligent workflow routing invoices to correct approvers',
+      },
+      {
+        icon: Search,
+        title: 'Contract Search',
+        description: 'AI enables quick search of key clauses and terms in supplier contracts',
+      },
+    ],
+  },
+  {
+    key: 'sales',
+    name: 'Sales & Marketing',
+    bg: 'bg-slate-50',
+    useCases: [
+      {
+        icon: FolderOpen,
+        title: 'Marketing Materials Repository',
+        description: 'Sales teams have instant access to latest presentations and case studies',
+      },
+      {
+        icon: Megaphone,
+        title: 'Key Customer Personalization',
+        description: 'Secure micro-portals for strategic clients with relevant information',
+      },
+      {
+        icon: PieChart,
+        title: 'Campaign Performance Analysis',
+        description: 'Dashboard aggregating data from various marketing platforms',
+      },
+    ],
+  },
+  {
+    key: 'leadership',
+    name: 'Leadership & Strategy',
+    bg: 'bg-gray-50',
+    useCases: [
+      {
+        icon: LayoutDashboard,
+        title: 'Executive Dashboard',
+        description: 'Consolidated view of key performance indicators in real-time',
+      },
+      {
+        icon: ClipboardList,
+        title: 'Strategic Project Management',
+        description: 'Central place for tracking progress, risks and budgets',
+      },
+      {
+        icon: MessageSquare,
+        title: 'Communication Portal',
+        description: 'Efficient channel for management to communicate company vision',
+      },
+    ],
+  },
+];
+
+const industriesShowcase = [
+  { key: 'finance', name: 'Finance', icon: Banknote, color: 'from-blue-500 to-blue-700' },
+  { key: 'manufacturing', name: 'Manufacturing', icon: Factory, color: 'from-cyan-500 to-cyan-700' },
+  { key: 'healthcare', name: 'Healthcare', icon: Stethoscope, color: 'from-green-500 to-green-700' },
+  { key: 'retail', name: 'Retail', icon: ShoppingBag, color: 'from-indigo-500 to-indigo-700' },
+  { key: 'public', name: 'Public Sector', icon: Landmark, color: 'from-yellow-500 to-yellow-700' },
+  { key: 'telecom', name: 'Telecommunications', icon: Phone, color: 'from-purple-500 to-purple-700' },
+];
+
+export default function UseCases() {
+  const [selectedDept, setSelectedDept] = useState('hr');
+  const [selectedIndustry, setSelectedIndustry] = useState('All Industries');
+  const [activeSection, setActiveSection] = useState('hr');
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+
+  // Smooth scroll and hash update
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.history.replaceState(null, '', `#${id}`);
+    }
+  };
+
+  // Set up Intersection Observer for fade-in and active section
+  useEffect(() => {
+    const sections = departmentDetails.map((dept) => document.getElementById(`dept-${dept.key}`));
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadein');
+          const id = entry.target.getAttribute('id')?.replace('dept-', '');
+          if (id) setActiveSection(id);
+        }
+      });
+    };
+    const observer = new window.IntersectionObserver(handleIntersect, {
+      threshold: 0.3,
+    });
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  // Handle URL hash on load
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      setTimeout(() => scrollToSection(id), 100);
+    }
+  }, []);
+
+  // Keyboard navigation for department nav
+  const handleDeptNavKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, deptKey: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setSelectedDept(deptKey);
+      scrollToSection(`dept-${deptKey}`);
+    }
+  };
+
+  return (
+    <main className="bg-gradient-to-b from-blue-50 to-gray-100 min-h-screen text-gray-900">
+      {/* Hero Section */}
+      <section
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900"
+        aria-label="Hero section"
+      >
+        {/* Background image with gradient overlay */}
+        <img
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80"
+          alt="Abstract AI and data background"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-70"
+          aria-hidden="true"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-blue-800/70 to-gray-900/90" aria-hidden="true" />
+        {/* Content */}
+        <div
+          className="relative z-10 w-full max-w-3xl mx-auto px-4 py-24 flex flex-col items-center justify-center text-center animate-fadein"
+          style={{ minHeight: '70vh' }}
+        >
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
+            Solutions Designed for Your Customer Needs
+          </h1>
+          <p className="text-lg md:text-2xl text-blue-100 mb-10 max-w-2xl mx-auto drop-shadow">
+            Explore how Kyndryl AI services address specific challenges in your client's business model and industry. Find your use case and unlock your customer's potential benefit from Kyndryl's AI services.
+          </p>
+          <a
+            href="mailto:ai-solutions@company.com"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg shadow-lg hover:from-blue-700 hover:to-cyan-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-200 text-lg"
+            role="button"
+            aria-label="Bring your AI use case proposal"
+          >
+            Bring your AI use case proposal
+          </a>
+        </div>
+        {/* Fade-in animation keyframes */}
+        <style>{`
+          .animate-fadein {
+            opacity: 0;
+            animation: fadein 1.2s ease 0.1s forwards;
+          }
+          @keyframes fadein {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: none; }
+          }
+        `}</style>
+      </section>
+
+      {/* Department Navigation Section */}
+      <nav
+        className="max-w-6xl mx-auto px-4 py-12"
+        aria-label="Department navigation"
+      >
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+        >
+          {departmentCards.map((dept) => {
+            const Icon = dept.icon;
+            const isActive = activeSection === dept.key;
+            return (
+              <a
+                key={dept.key}
+                href={`#dept-${dept.key}`}
+                onClick={e => {
+                  e.preventDefault();
+                  setSelectedDept(dept.key);
+                  scrollToSection(`dept-${dept.key}`);
+                }}
+                onKeyDown={e => handleDeptNavKeyDown(e, dept.key)}
+                className={
+                  `group focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-2xl transition-all duration-200 ${isActive ? 'ring-4 ring-blue-400 scale-105 bg-blue-50 border-blue-200' : ''}`
+                }
+                tabIndex={0}
+                aria-label={`Go to ${dept.name}`}
+                aria-current={isActive ? 'true' : undefined}
+              >
+                <div
+                  className={
+                    `flex flex-col items-center justify-center bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-200 p-8 h-full border border-gray-100 group-hover:scale-105 group-hover:bg-blue-50 group-hover:border-blue-200 group-focus:scale-105 group-focus:bg-blue-50 group-focus:border-blue-200 ${isActive ? 'border-blue-400' : ''}`
+                  }
+                  style={{ minHeight: 240 }}
+                >
+                  <div className="mb-4">
+                    <Icon className={`h-12 w-12 ${isActive ? 'text-blue-800' : 'text-blue-600'} group-hover:text-blue-800 group-focus:text-blue-800 transition-colors duration-200`} aria-hidden="true" />
+                  </div>
+                  <h3 className={`text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-800 group-focus:text-blue-800 transition-colors duration-200 text-center ${isActive ? 'text-blue-800' : ''}`}>
+                    {dept.name}
+                  </h3>
+                  <p className="text-gray-600 text-center text-base">
+                    {dept.description}
+                  </p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* Industry Filtering/Showcase Section */}
+      <section className="max-w-5xl mx-auto px-4 mb-20 pt-2 pb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">Examples from Industries</h2>
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {industriesShowcase.map((industry) => {
+            const Icon = industry.icon;
+            return (
+              <button
+                key={industry.key}
+                type="button"
+                className={
+                  `group flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r ${industry.color} text-white font-semibold shadow-md hover:scale-105 hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 text-base md:text-lg` +
+                  ' cursor-pointer select-none'
+                }
+                tabIndex={0}
+                aria-label={industry.name}
+                style={{ minWidth: 160 }}
+              >
+                <Icon className="h-6 w-6 text-white group-hover:text-gray-100 transition-colors duration-200" aria-hidden="true" />
+                <span>{industry.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Main Navigation Section */}
+      <nav id="departments" className="max-w-5xl mx-auto mt-[-60px] mb-12 px-4 relative z-20">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {departments.map((dept) => (
+            <button
+              key={dept.key}
+              onClick={() => {
+                setSelectedDept(dept.key);
+                scrollToSection(`dept-${dept.key}`);
+              }}
+              className={`group flex flex-col items-center justify-center p-5 rounded-xl bg-gradient-to-br ${dept.color} text-white shadow-md hover:scale-105 hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${selectedDept === dept.key ? 'ring-4 ring-blue-300' : ''}`}
+              aria-label={dept.name}
+            >
+              <span className="text-lg font-semibold mb-2">{dept.name}</span>
+              <span className="w-2 h-2 rounded-full bg-white/60 group-hover:bg-white mt-2" />
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      {/* Industry Filtering Section */}
+      <section className="max-w-4xl mx-auto mb-12 px-4">
+        <div className="flex flex-col md:flex-row items-center gap-4 justify-between bg-white rounded-xl shadow p-6">
+          <label htmlFor="industry" className="font-medium text-gray-700">Filter by Industry:</label>
+          <select
+            id="industry"
+            value={selectedIndustry}
+            onChange={e => setSelectedIndustry(e.target.value)}
+            className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
+          >
+            {industries.map(ind => (
+              <option key={ind} value={ind}>{ind}</option>
+            ))}
+          </select>
+        </div>
+      </section>
+
+      {/* Detailed Use Cases Sections */}
+      <section className="max-w-6xl mx-auto mb-16 px-4">
+        {departmentDetails.map((dept, i) => (
+          <section
+            key={dept.key}
+            id={`dept-${dept.key}`}
+            className={`${dept.bg} mb-12 py-12 px-4 rounded-3xl shadow-sm transition-colors duration-300`}
+            aria-labelledby={`heading-${dept.key}`}
+          >
+            <header className="mb-8 flex items-center gap-4">
+              <div className="w-3 h-12 rounded bg-gradient-to-b from-blue-400 to-blue-700" />
+              <h2 id={`heading-${dept.key}`} className="text-2xl md:text-3xl font-bold text-gray-800">{dept.name}</h2>
+            </header>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {dept.useCases.map((uc, idx) => {
+                const Icon = uc.icon;
+                return (
+                  <article
+                    key={idx}
+                    className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-200 border border-gray-100 flex flex-col items-center p-8 group focus-within:ring-4 focus-within:ring-blue-200 animate-fadein"
+                    tabIndex={0}
+                  >
+                    <Icon className="h-10 w-10 text-blue-600 mb-4 group-hover:text-blue-800 transition-colors duration-200" aria-hidden="true" />
+                    <h3 className="text-lg font-bold mb-2 text-gray-900 text-center">{uc.title}</h3>
+                    <p className="text-gray-600 text-center mb-6 flex-1">{uc.description}</p>
+                    <a
+                      href="#"
+                      className="inline-block mt-auto px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg shadow hover:from-blue-700 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-200 text-base"
+                      tabIndex={0}
+                      aria-label={`Learn more about ${uc.title}`}
+                    >
+                      Learn More
+                    </a>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </section>
+
+      {/* Call-to-Action Footer Section */}
+      <footer className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-gray-900 text-white py-20 px-4 mt-16 overflow-hidden">
+        {/* Optional subtle pattern/gradient overlay */}
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none" aria-hidden="true" />
+        <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center justify-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 drop-shadow-lg">Have Your Own Idea or Need Consultation?</h2>
+          <p className="mb-8 text-blue-100 text-lg md:text-xl max-w-xl mx-auto">Our team of experts is ready to discuss your specific requirements and propose a tailored solution.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 w-full">
+            <a
+              href="mailto:ai-solutions@company.com?subject=Schedule%20a%20Consultation"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-500 hover:to-blue-700 focus:outline-none focus:ring-4 focus:ring-cyan-300 transition-all duration-200 text-lg animate-fadein"
+              role="button"
+              aria-label="Schedule a Consultation"
+            >
+              Schedule a Consultation
+            </a>
+            <a
+              href="mailto:ai-solutions@kyndryl.com"
+              className="inline-block px-8 py-4 bg-white text-blue-800 font-semibold rounded-lg shadow-lg hover:bg-blue-100 hover:text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-200 text-lg animate-fadein"
+              role="button"
+              aria-label="Bring your AI use case proposal"
+            >
+              Bring your AI use case proposal
+            </a>
+          </div>
+          {/* Optional trust/contact info */}
+          <div className="text-blue-200 text-sm mt-2">
+            <span className="inline-block mr-2">Trusted by Kyndryl's customers</span>
+            <span className="inline-block">| ai-solutions@kyndryl.com</span>
+          </div>
+        </div>
+        <style>{`
+          .animate-fadein {
+            opacity: 0;
+            animation: fadein 1.2s ease 0.1s forwards;
+          }
+          @keyframes fadein {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: none; }
+          }
+        `}</style>
+      </footer>
+    </main>
+  );
+}
