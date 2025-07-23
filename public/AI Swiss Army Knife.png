@@ -1,0 +1,36 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Swiss Army Knife Body -->
+  <rect x="50" y="120" width="300" height="60" rx="30" fill="#CC0000" stroke="#990000" stroke-width="2"/>
+  
+  <!-- AI Logo in center -->
+  <circle cx="200" cy="150" r="20" fill="#FFFFFF"/>
+  <text x="200" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#CC0000">AI</text>
+  
+  <!-- Tools extending out -->
+  <!-- ChatGPT Tool -->
+  <rect x="20" y="80" width="80" height="15" rx="5" fill="#74AA9C" transform="rotate(-30 60 87.5)"/>
+  <text x="60" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" transform="rotate(-30 60 92)">GPT</text>
+  
+  <!-- Copilot Tool -->
+  <rect x="20" y="195" width="80" height="15" rx="5" fill="#0078D4" transform="rotate(30 60 202.5)"/>
+  <text x="60" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" transform="rotate(30 60 207)">Copilot</text>
+  
+  <!-- Claude Tool -->
+  <rect x="300" y="80" width="80" height="15" rx="5" fill="#D97706" transform="rotate(30 340 87.5)"/>
+  <text x="340" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" transform="rotate(30 340 92)">Claude</text>
+  
+  <!-- Gemini Tool -->
+  <rect x="300" y="195" width="80" height="15" rx="5" fill="#4285F4" transform="rotate(-30 340 202.5)"/>
+  <text x="340" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" transform="rotate(-30 340 207)">Gemini</text>
+  
+  <!-- Additional small tools -->
+  <rect x="150" y="90" width="60" height="10" rx="3" fill="#10B981" transform="rotate(-15 180 95)"/>
+  <text x="180" y="99" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="white" transform="rotate(-15 180 99)">Analytics</text>
+  
+  <rect x="190" y="200" width="60" height="10" rx="3" fill="#8B5CF6" transform="rotate(15 220 205)"/>
+  <text x="220" y="209" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="white" transform="rotate(15 220 209)">Vision</text>
+  
+  <!-- Swiss cross detail -->
+  <rect x="195" y="125" width="10" height="4" fill="#FFFFFF"/>
+  <rect x="197" y="123" width="6" height="8" fill="#FFFFFF"/>
+</svg>
